@@ -1,0 +1,34 @@
+<component info="CentraStage Component">
+  <general>
+    <name>DRMM Log Grabber [WIN]</name>
+    <category>scripts</category>
+    <description>Grabs logs (or any files), zips them and outputs them into a directory of your choice. Both files and folders are accepted.</description>
+    <uid>b690e0c9-28a4-402f-bee0-b2178038cd8f</uid>
+    <hash />
+    <version>4</version>
+    <timeout>3600</timeout>
+    <securityLevel>1</securityLevel>
+    <installType>powershell</installType>
+  </general>
+  <variable idx='0'>
+    <name>log_grabber_files</name>
+    <type>string</type>
+    <direction>false</direction>
+    <description>files and folders to zip, separated by semicolons</description>
+    <defaultVal></defaultVal>
+  </variable>
+  <variable idx='1'>
+    <name>log_grabber_output_dir</name>
+    <type>string</type>
+    <direction>false</direction>
+    <description>Directory to output the zipfile to</description>
+    <defaultVal></defaultVal>
+  </variable>
+  <variable idx='3'>
+    <name>log_grabber_datto_rmm</name>
+    <type>boolean</type>
+    <direction>false</direction>
+    <description>Get dRMM files?</description>
+    <defaultVal>true</defaultVal>
+  </variable>
+</component>
