@@ -11,10 +11,10 @@ if (!($env:test -eq $true)) {
     }
 
     #Based on http://help.aem.autotask.net/en/Content/5AGENT/LogFile.htm?Highlight=log%20files
-    #TODO: exclude the binary files in these directories or filter down to only log/text files
-    #Right now we just get all of them to preserver the directory structure
+    #...and actual tech support tickets
     if ($env:log_grabber_datto_rmm -eq $true) {
-        $files_string += "$env:ProgramFiles\CentraStage\;$env:ProgramFiles (x86)\CentraStage\;$env:ProgramData\CentraStage\AEMAgent\DataLog\"
+        $files_string += "$env:ProgramFiles\CentraStage\log.txt;${env:ProgramFiles(x86)}\CentraStage\log.txt;$env:ProgramFiles\CentraStage\archives\*;${env:ProgramFiles(x86)}\CentraStage\archives\*;"
+        $files_string += "$env:ProgramData\CentraStage\AEMAgent\DataLog\;$env:ProgramData\CentraStage\AEMAgent\Monitors.json;$env:ProgramData\CentraStage\Monitoring\*;$env:ProgramData\CentraStage\EndpointSecurity\policy.xml;$env:ProgramData\CentraStage\EndpointSecurity\aes\*.log"
     }
 
     if ($null -eq $env:log_grabber_output_dir) {
@@ -40,16 +40,18 @@ $date = Get-Date
 $dir = -join($env:computername,'-', $date.Year, $date.Month, $date.Day, $date.Hour, $date.Minute, $date.Second)
 $zipfile = -join($env:computername,'-', $date.Year, $date.Month, $date.Day, $date.Hour, $date.Minute, $date.Second, ".zip")
 
-New-Item -ItemType Directory -Force -Path .\$dir
+#New-Item -ItemType Directory -Force -Path .\$dir
+Write-Host $files_string
 
 #Copy the files
 foreach ($file in $files) {
-    if (Test-Path -Path "$file") {
-        Copy-Item -Recurse -Force "$file" -Destination .\$dir\
-        Write-Host "Copying $file"
+    if (!($null -eq $file)) {
+        if (Test-Path -Path "$file") {
+            #Copy-Item -Recurse -Force "$file" -Destination .\$dir\
+            #Write-Host "Copying $file"
+            .\bin\7zip\7z.exe a $log_grabber_output_dir\$zipfile -tzip -spf $file
+        }
     } else {
         Write-Host "$file wasn't found, continuing without it"
     }
 }
-
-.\bin\7zip\7z.exe a  $log_grabber_output_dir\$zipfile -tzip  .\$dir\*
