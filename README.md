@@ -1,5 +1,5 @@
 # Overview #
-Compontent to grab files from an input variable, copy them, zip them and put the zip in a directory specified by another variable.
+Component to grab files from an input variable, copy them, zip them and put the zip in a directory specified by another variable.
 
 # Usage #
 The variables below make use mostly self explanatory. The zipfile will automatically be named HOSTNAME-datestamp.zip, such as JM_Laptop-20181219211452.zip
