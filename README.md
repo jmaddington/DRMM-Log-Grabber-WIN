@@ -17,4 +17,4 @@ Please note that you can put in non-existant files and this component will happi
 Download or fork, cd into build and run repackage.bat and upload aem-component.cpt to dRMM. You can also download the aem-component.cpt straight from this repository and install in your dRMM instance.
 
 # Bonus #
-You'll find a basic toolchain for creating and editing dRMM compononts in the bin, build and initialize directories. Feel free to use it.
+You'll find a basic toolchain for creating and editing dRMM compononts in the bin, build and initialize directories. Feel free to use it. You can find the most recent version of it at https://github.com/jmaddington/AEM-AEM-Template-PS
