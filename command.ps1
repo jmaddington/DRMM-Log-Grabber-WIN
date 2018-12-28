@@ -10,6 +10,8 @@ if (!($env:test -eq $true)) {
         $files_string += $env:log_grabber_files + ";"
     }
 
+    #Based on http://help.aem.autotask.net/en/Content/5AGENT/LogFile.htm?Highlight=log%20files
+    #TODO: exclude the binary files in these directories or filter down to only log/text files
     if ($env:log_grabber_datto_rmm -eq $true) {
         $files_string += "$env:ProgramFiles\CentraStage\;$env:ProgramFiles (x86)\CentraStage\;$env:ProgramData\CentraStage\AEMAgent\DataLog\"
     }
@@ -24,6 +26,11 @@ if (!($env:test -eq $true)) {
 
 } else {
     #We're in testing mode
+}
+
+#Dump all the environmental variables to stdout, usually only for debugging
+if ($env:dump_env_vars -eq $true) {
+    Write-Host (ls variable:$env)
 }
 
 $files = $files_string.split(";");
