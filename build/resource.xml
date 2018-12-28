@@ -31,11 +31,11 @@
     <description>Get dRMM files?</description>
     <defaultVal>true</defaultVal>
   </variable>
-    <variable idx='3'>
+    <variable idx='4'>
     <name>dump_env_vars</name>
     <type>boolean</type>
     <direction>false</direction>
     <description>Dump all env vars to stdout. Useful for debuggung,</description>
-    <defaultVal>true</defaultVal>
+    <defaultVal>false</defaultVal>
   </variable>
 </component>
