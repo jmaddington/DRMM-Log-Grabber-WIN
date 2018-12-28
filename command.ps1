@@ -1,5 +1,3 @@
-#do something
-
 $files_string = ""
 
 if (!($env:test -eq $true)) {
@@ -34,21 +32,22 @@ if ($env:dump_env_vars -eq $true) {
     Write-Host (Get-ChildItem variable:$env)
 }
 
-$files = $files_string.split(";");
-
 $date = Get-Date
-$dir = -join($env:computername,'-', $date.Year, $date.Month, $date.Day, $date.Hour, $date.Minute, $date.Second)
 $zipfile = -join($env:computername,'-', $date.Year, $date.Month, $date.Day, $date.Hour, $date.Minute, $date.Second, ".zip")
 
-#New-Item -ItemType Directory -Force -Path .\$dir
+Write-Host "Final string of files"
 Write-Host $files_string
+
+#Split the files into an array
+$files = $files_string.split(";");
 
 #Copy the files
 foreach ($file in $files) {
-    if (!($null -eq $file)) {
+
+    #The final "file" is usually empty and will throw an error if we test the path on it.
+    if (!("" -eq $file)) {
         if (Test-Path -Path "$file") {
-            #Copy-Item -Recurse -Force "$file" -Destination .\$dir\
-            #Write-Host "Copying $file"
+            #-spf option includes the _full_ path in the zipfile
             .\bin\7zip\7z.exe a $log_grabber_output_dir\$zipfile -tzip -spf $file
         }
     } else {
